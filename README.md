@@ -6,7 +6,7 @@
 이미 시중에 독서앱들이 충분히 많이 있지만, 제가 원하는 기능만 쓰고싶어서 만들어보려고 합니다.
 
 ## 앱 기능 소개
-* [세부 기능](https://www.notion.so/0949c539c6504d73872422a5846bf332)
+* [세부 기능](https://github.com/aralaa/BookJournal/wiki/%EC%84%B8%EB%B6%80-%EA%B8%B0%EB%8A%A5)
 * [프로토타이핑](https://ovenapp.io/project/bHQBH5rG1FxxhiJf0e1dgmXHL6mTrrgz#tpB9X)
 
 ## Design
