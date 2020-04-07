@@ -25,7 +25,8 @@ BookJournal은 ReactNative 기술을 배우고 싶어서 기획하게 되었다.
 ## Design
 * [USE CASE 분석](https://github.com/aralaa/BookJournal/wiki/USE-CASE-%EB%B6%84%EC%84%9D)
 * [데이터 정의](https://github.com/aralaa/BookJournal/wiki/%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%A0%95%EC%9D%98)
-* [DB 및 서버 설계](https://github.com/aralaa/BookJournal/wiki/DB-%EB%B0%8F-%EC%84%9C%EB%B2%84-%EC%84%A4%EA%B3%84)
+* [Database Schema](https://github.com/aralaa/BookJournal/wiki/Database-Schema)
+* [BookJournal API](https://github.com/aralaa/BookJournal/wiki/BookJournal-API)
 
 
 ## Development Environment 
