@@ -77,13 +77,25 @@ router.put('/:id/books/:isbn', (req, res) => {
   * 책 보기 | GET /bookjournals/:id/books/:isbn
   */
 router.get('/:id/books/:isbn', function(req, res, next) {
-  // bookjournal.state, bookjournal.grade, bookjournal.start_date, bookjournal.end_date
-  // book.title, book.author, book.cover
-  // bookjournal.isbn, book.isbn
-  // inner join 사용해서 테이블 가져오기
+  var user_id = req.params.id;
+  var isbn = req.params.isbn;
 
-  
-  res.send('respond with a resource');
+  var sql_select = "SELECT bookjournal.user_id, book.title, book.author, book.cover, bookjournal.state, bookjournal.grade, bookjournal.start_date, bookjournal.end_date " +
+                    "FROM bookjournal INNER JOIN book " +
+                    "ON bookjournal.isbn = book.isbn " +
+                    "WHERE bookjournal.user_id = ? and book.isbn = ?; ";
+
+  var params = [user_id, isbn];
+
+  db.get().query(sql_select, params, (err, rows) => {
+
+    if (err) {
+      console.log(err);
+      return res.sendStatus(400);
+    }
+    console.log("rows : " + JSON.stringify(rows));
+    res.json(rows[0]);
+  });   
 });
 
 
