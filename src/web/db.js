@@ -9,7 +9,7 @@ exports.connect = function(done) {
         port: 3306,
         user:'root',
         password: 'mysql1234',
-        database: 'bookjounaldb',
+        database: 'bookjournaldb',
     });
 }
 

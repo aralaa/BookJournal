@@ -1,11 +1,12 @@
 var express = require('express');
 var router = express.Router();
-//var db = require('../db');
+var db = require('../db');
+
 
 /**
  * 책 추가 | POST /bookjournals/:id
  */
-router.post('/:id', function(req, res, next){
+router.post('/:id', (req, res) => {
   var user_id = req.params.id;
   var isbn = req.body.isbn;
   var title = req.body.title;
@@ -16,8 +17,33 @@ router.post('/:id', function(req, res, next){
   var start_date = req.body.start_date;
   var end_date = req.body.end_date;
 
-  var sql = "insert into bookjournal ('user_id', 'isbn', 'state', 'grade', 'start_date', 'end_date') "+
-  "values(?, ?, ?, ?, ?, ?); ";
+  // 1) BOOK 테이블에 새로운 책 저장
+  var sql_select = "SELECT * FROM book " +
+            "WHERE isbn =?; ";
+  db.get().query(sql_select, [isbn], (err, rows) => {
+    //undefinded(DB에 데이터가 없을 때)면 insert
+    if (!err) {
+      if (rows[0] !== undefined) {
+        //res.send(rows[0].isbn)
+      } else {
+        var sql_insert = "insert into book (isbn, title, author, cover) " +
+                          "values(?, ?, ?, ?); ";
+
+        params = [isbn, title, author, cover];
+
+        db.get().query(sql_insert, params, (err, rows) => {
+          res.json(rows[0]);
+        })
+      }
+
+    } else {
+      res.send('err: ' + err);
+    }
+  });
+
+  // 2) BOOKJOURNAL 테이블에 저장
+  var sql = "insert into bookjournal (user_id, isbn, state, grade, start_date, end_date) " +
+    "values(?, ?, ?, ?, ?, ?); ";
 
   var params = [user_id, isbn, state, grade, start_date, end_date];
 
@@ -29,14 +55,17 @@ router.post('/:id', function(req, res, next){
     }
     console.log("rows : " + JSON.stringify(rows));
     res.json(rows[0]);
-
   });
-
 });
+
 
 /**
  * 책 수정 | PUT /bookjournals/:id/books/:isbn
+ * 업데이트 할 수 있는 경우가 여러개?
  */
+router.put('/:id/books/:isbn', (req, res) => {
+  
+});
 
 
 /**
@@ -47,6 +76,15 @@ router.post('/:id', function(req, res, next){
  /**
   * 책 보기 | GET /bookjournals/:id/books/:isbn
   */
+router.get('/:id/books/:isbn', function(req, res, next) {
+  // bookjournal.state, bookjournal.grade, bookjournal.start_date, bookjournal.end_date
+  // book.title, book.author, book.cover
+  // bookjournal.isbn, book.isbn
+  // inner join 사용해서 테이블 가져오기
+
+  
+  res.send('respond with a resource');
+});
 
 
 
